@@ -1,4 +1,4 @@
-﻿#deviceControlsWrapper {
+﻿/* #deviceControlsWrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
@@ -15,4 +15,4 @@
 #deviceListDiv{
     overflow-y: auto;
     overflow-x: hidden;
-}
+} */

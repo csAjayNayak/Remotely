@@ -4,8 +4,9 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
+
 .navbar {
     background: #718800;
     background-size: cover;
@@ -15,6 +16,7 @@
     padding-top: 2px;
     box-shadow: 0 1px 1px rgb(0 0 0 / 43%);
 }
+
 .navbar-brand {
     font-size: 1.1rem;
 }
@@ -28,30 +30,36 @@
 
 .nav-item {
     font-size: 0.9rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.2rem;
 }
 
-    .nav-item:first-of-type {
-        padding-top: 1rem;
-    }
+.nav-item:first-of-type {
+    padding-top: 1rem;
+}
 
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
-    }
+.nav-item:last-of-type {
+    padding-bottom: 1rem;
+}
 
-    .nav-item ::deep a {
-        color: #5a5a5a;
-        font-size:12px;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-    }
+.nav-item ::deep a {
+    color: #5a5a5a;
+    font-size: 12px;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
+
+.nav-item ::deep button {
+    color: #5a5a5a;
+    font-size: 12px;
+    border-radius: 4px;
+}
 
 .nav-item ::deep a.active {
-    background-color:#f1f3f4;
-    border-radius:4px;
+    background-color: #f1f3f4;
+    border-radius: 4px;
     color: #5a5a5a;
 }
 
@@ -59,13 +67,21 @@
     background-color: #f1f3f4;
     color: #000;
 }
+
 .nav-item ::deep a span {
     color: #607d8b;
     font-size: 20px;
 }
+
+.nav-item ::deep button span {
+    color: #607d8b;
+    font-size: 20px;
+}
+
 .nav-item ::deep a.active span {
     color: #718800;
 }
+
 @media (min-width: 641px) {
     .navbar-toggler {
         display: none;

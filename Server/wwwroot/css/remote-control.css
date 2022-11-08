@@ -41,20 +41,23 @@ button {
     height: 32px;
     line-height: 21px;
 }
-.option-button span{
+
+.option-button span {
     display: flex;
     justify-content: center;
     align-items: center;
     grid-gap: 5px;
 }
-    .option-button:hover {
-        background: #eceff1;
-        color: #607d8b;
-    }
-    .horizontal-bar-button {
-        height: 35px;
-        margin: 5px;
-    }
+
+.option-button:hover {
+    background: #eceff1;
+    color: #607d8b;
+}
+
+.horizontal-bar-button {
+    height: 35px;
+    margin: 5px;
+}
 
 .menu-options-header {
     text-align: center;
@@ -86,21 +89,25 @@ button {
     transition: .5s ease left;
 }
 
-    #menuButton:focus {
-        outline: none;
-    }
+#menuButton:focus {
+    outline: none;
+}
+
 #menuButton i {
     transform: rotate(90deg);
 }
-    #menuButton.open {
-        top: 150px;
-        border-radius: 0 3px 3px 0;
-        transition: .5s ease left;
-       
-    }
-    #menuButton.open i {
-        transform: rotate(-90deg);
-    }
+
+#menuButton.open {
+    top: 150px;
+    border-radius: 0 3px 3px 0;
+    transition: .5s ease left;
+
+}
+
+#menuButton.open i {
+    transform: rotate(-90deg);
+}
+
 /*#menuFrame {
     position: absolute;
     left: 0;
@@ -128,6 +135,14 @@ button {
 
 
 .horizontal-button-bar {
+    background-color: #cfd8dc !important;
+    color: #180808 !important;
+
+}
+
+
+
+.horizontal-button-bar {
     position: fixed;
     height: 0;
     padding: 0;
@@ -142,12 +157,17 @@ button {
     text-align: center;
 }
 
-    .horizontal-button-bar.open {
-        height: auto;
-        min-height: 40px;
-        padding: 10px;
-        transition: all 250ms;
-    }
+.horizontal-button-bar.open {
+    height: auto;
+    min-height: 40px;
+    padding: 10px;
+    transition: all 250ms;
+    max-width: 170px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important
+}
 
 
 #screenViewerWrapper {
@@ -161,7 +181,8 @@ button {
     touch-action: pan-x pan-y;
 }
 
-#screenViewer, #videoScreenViewer {
+#screenViewer,
+#videoScreenViewer {
     max-width: 99vw;
     max-height: 99vh;
     z-index: 1;
@@ -181,13 +202,13 @@ button {
     padding: 0 20px 20px 20px;
 }
 
-    .center-connection-box button {
-        height: 30px;
-    }
+.center-connection-box button {
+    height: 30px;
+}
 
-    .center-connection-box input {
-        width: 100%;
-    }
+.center-connection-box input {
+    width: 100%;
+}
 
 .remotely-header {
     position: fixed;
@@ -275,26 +296,26 @@ footer {
     padding: 10px;
     border: 2px solid white;
     border-radius: 5px;
-    box-shadow: 10px 10px 5px rgba(50,50,50,0.9);
+    box-shadow: 10px 10px 5px rgba(50, 50, 50, 0.9);
     z-index: 3;
     min-height: 100px;
 }
 
-    .modal-prompt input {
-        margin-top: 15px;
-        width: 100%;
-    }
+.modal-prompt input {
+    margin-top: 15px;
+    width: 100%;
+}
 
 .buttons-footer {
     text-align: right;
     margin-top: 10px
 }
 
-    .buttons-footer button {
-        height: 30px;
-        width: 60px;
-        margin-left: 10px;
-    }
+.buttons-footer button {
+    height: 30px;
+    width: 60px;
+    margin-left: 10px;
+}
 
 #touchKeyboardTextArea {
     position: fixed;
@@ -324,19 +345,31 @@ footer {
     padding: 10px;
     border-radius: 5px;
 }
+
 .options-grid {
     display: grid;
     grid-gap: 5px;
     grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
     justify-content: end;
 }
-    .options-grid i {
-        display: block;
-        color: #607d8b;
-    }
-    .options-grid .d-none {
-        display: none;
-    }
+
+.options-grid i {
+    display: block;
+    color: #607d8b;
+}
+
+.options-grid .d-none {
+    display: none;
+}
+
 .d-none {
     display: none;
+}
+
+#typeClipboardButton {
+    background-color: #455a64 !important;
+    width: 100%;
+    margin: initial;
+    font-size: 14px;
+
 }

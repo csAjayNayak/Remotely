@@ -8,6 +8,7 @@
 @inject IDataService DataService
 
 
+
 @{
     var organizationName = "Remotely";
     var user = DataService.GetUserByNameWithOrg(User?.Identity?.Name);
@@ -51,7 +52,7 @@
                 <link rel="stylesheet" href="~/css/Themes/yeti.custom.css" asp-append-version="true" />
                 break;
             case Remotely.Shared.Enums.Theme.Dark:
-              <link rel="stylesheet" href="~/css/Themes/yeti.min.css" />
+                <link rel="stylesheet" href="~/css/Themes/yeti.min.css" />
                 <link rel="stylesheet" href="~/css/Themes/yeti.custom.css" asp-append-version="true" />
                 break;
             default:
@@ -72,48 +73,66 @@
         }
     }
 </head>
-<body id="login-main">
-    @* <header>
-        <nav class="navbar bg-green navbar-expand-sm navbar-toggleable-sm mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand text-white text-left d-flex align-items-center" href="~/">
-                    <div class="logo-title font-weight-bold">
-                        @organizationName
-                    </div>
-                    <div class="logo-subtitle pl-1">Support Portal</div>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+@if (user is RemotelyUser)
+{
+    <body>
+        <header>
+            <nav class="navbar bg-green navbar-expand-sm navbar-toggleable-sm mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-white text-left d-flex align-items-center" href="~/">
+                        <div class="logo-title font-weight-bold">
+                            @organizationName
+                        </div>
+                        <div class="logo-subtitle pl-1">Support Portal</div>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    @{
-                        var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
-                    }
-                    @if (result.Success)
-                    {
-                        await Html.RenderPartialAsync("_LoginPartial");
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        @{
+                            var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
+                        }
+                        @if (result.Success)
+                        {
+                            await Html.RenderPartialAsync("_LoginPartial");
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
                             "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
                             $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
-                    }
+                        }
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header> *@
+            </nav>
+        </header>
 
-    <div class="container pt-5">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <div class="container pt-5">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
 
-    <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Identity/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-</body>
+        <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Identity/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+    </body>
+}
+else
+{
+    <body id="login-main">
+        <div class="container pt-5">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+        <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Identity/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+    </body>
+}
+
 </html>

@@ -574,7 +574,7 @@ h3 {
     border: solid 1px #6B7886;
     border-radius: 4px;
     height: 32px;
-    min-width: 172px;
+    min-width: 152px;
     color: #A4B9D2;
     display: inline-block;
     font-weight: 500;
@@ -621,9 +621,10 @@ h3 {
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
-    background: url('../images/login-bx-bg.jpg') left top repeat-x #ffffff;
+    background: url('../../images/login-bx-bg.jpg') left top repeat-x #ffffff;
     background-size: auto 5px;
     height: 100%;
+    max-width: 400px !important;
 }
 
 .subtext {
@@ -636,4 +637,14 @@ h3 {
 
 .font-12 {
     font-size: 12px !important;
+}
+
+.icon-title {
+    font-weight: 700;
+    color: #455a64;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='%23718800' class='bi bi-calendar' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z'/%3E%3C/svg%3E");
+
 }
