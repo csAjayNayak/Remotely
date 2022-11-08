@@ -11,77 +11,88 @@
 
 @if (User?.IsAdministrator == true)
 {
-    <div class="buttons-row mb-3">
-        <div>
-            <button class="btn btn-danger" type="button" @onclick="ClearAllLogs">
-                Delete Logs
-            </button>
-        </div>
-        <div>
-            <button class="btn btn-primary"
-                    onclick="location.assign('/API/ServerLogs/Download')">
-                Download Logs
-            </button>
-        </div>
-        <div>
-            <button class="btn btn-primary"
-                    onclick="location.assign('/API/ScriptResults')">
-                Download Script History
-            </button>
-        </div>
-    </div>
-    <div class="filters-row mb-3">
-        <div style="display:inline-block">
-            <strong>Type:</strong>
-            <br />
-            <select class="form-control-sm" @bind="_eventType">
-                <option value="">All</option>
-                @foreach (var eventType in Enum.GetValues(typeof(EventType)))
-                {
-                    <option @key="eventType" value="@eventType">@eventType</option>
-                }
-            </select>
-        </div>
-        <div style="display:inline-block">
-            <strong>Filter:</strong>
-            <br />
-            <input type="text" @bind="_messageFilter" />
-        </div>
-        <div style="display:inline-block">
-            <strong>From:</strong>
-            <br />
-            <input type="date" @bind="_fromDate" />
-        </div>
-        <div style="display:inline-block">
-            <strong>To:</strong>
-            <br />
-            <input type="date" @bind-value="_toDate" />
-        </div>
-    </div>
+    <div class="d-flex justify-content-end align-items-center">
 
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>Type</th>
-                <th>Timestamp</th>
-                <th>Message</th>
-                <th>Source</th>
-                <th>Stack Trace</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var eventLog in FilteredLogs)
-            {
-                <tr @key="eventLog">
-                    <td>@eventLog.EventType</td>
-                    <td>@eventLog.TimeStamp</td>
-                    <td>@eventLog.Message</td>
-                    <td>@eventLog.Source</td>
-                    <td>@eventLog.StackTrace</td>
+        <div class="form-row align-items-center">
+            <div class="col-auto my-1">
+                <button class="btn btn-danger" type="button" @onclick="ClearAllLogs">
+                    Delete Logs
+                </button>
+            </div>
+            <div class="col-auto my-1">
+                <button class="btn btn-primary"
+                    onclick="location.assign('/API/ServerLogs/Download')">
+                    Download Logs
+                </button>
+            </div>
+            <div class="col-auto my-1">
+                <button class="btn btn-primary"
+                    onclick="location.assign('/API/ScriptResults')">
+                    Download Script History
+                </button>
+            </div>
+        </div>
+
+        <div class="ml-2 form-row align-items-center">
+            <div class="col-auto my-1">
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" @bind="_eventType">
+                    <option value="">All</option>
+                    @foreach (var eventType in Enum.GetValues(typeof(EventType)))
+                    {
+                        <option @key="eventType" value="@eventType">@eventType</option>
+                    }
+                </select>
+            </div>
+            <div class="col-auto my-1">
+                
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text search-rounded"></span>
+                    </div>
+                    <input type="search" class="form-control" @bind="_messageFilter" placeholder="Search">
+                </div>
+
+            </div>
+            <div class="col-auto my-1">
+                <div class="form-group">
+                    <input type="date" class="form-control rounded" @bind="_fromDate">
+                </div>
+            </div>
+            <div class="col-auto my-1">
+                To
+            </div>
+            <div class="col-auto my-1">
+                <div class="form-group">
+                    <input type="date" class="form-control rounded" @bind-value="_toDate">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Timestamp</th>
+                    <th>Message</th>
+                    <th>Source</th>
+                    <th>Stack Trace</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var eventLog in FilteredLogs)
+                {
+                    <tr @key="eventLog">
+                        <td>@eventLog.EventType</td>
+                        <td>@eventLog.TimeStamp</td>
+                        <td>@eventLog.Message</td>
+                        <td>@eventLog.Source</td>
+                        <td>@eventLog.StackTrace</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {

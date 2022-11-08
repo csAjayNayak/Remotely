@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: rgb(225,225,225);
+    background-color:#fff;
     color: rgb(25,25,25);
 }
 
@@ -42,7 +42,9 @@ button[disabled] {
 
 #menuFrame {
     color: white;
-    background-color: rgb(50,50,50);
+    //background-color: rgb(50,50,50);
+    position:relative;
+    z-index:3;
 }
 
 

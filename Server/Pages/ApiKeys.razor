@@ -8,70 +8,86 @@
 @inject IModalService ModalService
 
 
-<h3>API Keys</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 m-auto">
+            <h3>API Keys</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card p-3 col-lg-8 col-md-10 col-sm-12 col-xs-12 rounded-lg  m-auto">
+            @if (!string.IsNullOrWhiteSpace(_alertMessage))
+            {
+                <AlertBanner Message="@_alertMessage" />
+            }
 
-@if (!string.IsNullOrWhiteSpace(_alertMessage))
-{
-    <AlertBanner Message="@_alertMessage" />
-}
-
-@if (User?.IsAdministrator == true)
-{
-    if (!string.IsNullOrWhiteSpace(_newKeySecret))
-    {
-        <h5 class="text-warning font-weight-bold mb-2 mt-4">Warning: The key's secret will only be shown once.  Save it now.</h5>
-        <h5 class="mb-4">
-            <label class="mr-1">Key Secret:</label>
-            <input class="form-control custom-control-inline" readonly value="@_newKeySecret" style="width:400px" />
-        </h5>
-    }
+            @if (User?.IsAdministrator == true)
+            {
+                if (!string.IsNullOrWhiteSpace(_newKeySecret))
+                {
+                    <h5 class="text-warning font-weight-bold mb-2 mt-4">Warning: The key's secret will only be shown once.  Save it now.</h5>
+                    <h5 class="mb-4">
+                        <label class="mr-1">Key Secret:</label>
+                        <input class="form-control custom-control-inline" readonly value="@_newKeySecret" style="width:400px" />
+                    </h5>
+                }
 
 
-    <div class="mb-2 mt-4">
-        <label class="mr-1">New Token Name:</label>
-        <input @bind="_createKeyName" @bind:event="oninput"
-               class="form-control form-control-sm custom-control-inline mr-1"
-               style="width:200px" />
+                <div class="mb-2 form-group mt-4">
+                    <label class="mr-1 control-label">New Token Name:</label>
+                    <div class="d-flex">
+                        <input @bind="_createKeyName" @bind:event="oninput" class="form-control" />
 
-        <button class="btn btn-primary" type="button" @onclick="CreateNewKey">Create</button>
+                        <button class="btn btn-primary mx-2" type="button" @onclick="CreateNewKey">Create</button>
 
-        <button class="btn btn-sm btn-secondary ml-2" @onclick="ShowApiKeyHelp">
-            <span class="oi oi-question-mark"></span>
-        </button>
+                        <button class="btn btn-sm btn-secondary" @onclick="ShowApiKeyHelp">
+                            <span class="oi oi-question-mark"></span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>ID</th>
+                            <th>Last Used</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var apiToken in _apiTokens)
+                        {
+                            <tr @key="apiToken.ID">
+                                <td>@apiToken.Name</td>
+                                <td>@apiToken.ID</td>
+                                <td>@apiToken.LastUsed</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" @onclick="() => RenameKey(apiToken.ID)">Rename</button>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger" @onclick="() => DeleteKey(apiToken.ID)">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h5 class="text-muted">Only organization administrators can view this page.</h5>
+            }
+
+        </div>
     </div>
 
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-                <th>Last Used</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var apiToken in _apiTokens)
-            {
-                <tr @key="apiToken.ID">
-                    <td>@apiToken.Name</td>
-                    <td>@apiToken.ID</td>
-                    <td>@apiToken.LastUsed</td>
-                    <td>
-                        <button type="button" class="btn btn-primary" @onclick="() => RenameKey(apiToken.ID)">Rename</button>
-                    </td>
-                    <td>
-                        <button type="submit" class="btn btn-danger" @onclick="() => DeleteKey(apiToken.ID)">Delete</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <h5 class="text-muted">Only organization administrators can view this page.</h5>
-}
+</div>
+
+
+
+
 
 
 @code {
@@ -135,6 +151,6 @@ else
         {
             "API keys should be added to the request header when making API calls.  The key should be \"Authorization\", and value should be \"{key-id}:{key-secret}\".  Note the colon in between.",
             "Example: Authorization=e5da1c09-e851-4bd4-a8c1-532144b3f894:7uY6h5zBYm4+90pZVek4lD6ewbQ83nKcDpghBfG00hhZu6Ew"
-        });
+    });
     }
 }

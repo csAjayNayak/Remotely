@@ -9,7 +9,8 @@
 }
 
 .sidebar {
-    background-image: linear-gradient(155deg, rgb(30 30 30), steelblue 200%);
+    background-color:#fff;
+    color:#607d8b;
 }
 
 .top-row {
@@ -50,11 +51,12 @@
     }
 
     .sidebar {
-        min-width: 250px;
+        min-width: 240px;
         height: 100vh;
         position: sticky;
         overflow-y: auto;
         top: 0;
+        z-index:1030;
     }
 
     .top-row {

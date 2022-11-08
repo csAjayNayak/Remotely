@@ -6,7 +6,15 @@
     height: 3.5rem;
     background-color: rgba(0,0,0,0.4);
 }
-
+.navbar {
+    background: #718800;
+    background-size: cover;
+    min-height: auto;
+    height: 40px;
+    margin-bottom: 0;
+    padding-top: 2px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 43%);
+}
 .navbar-brand {
     font-size: 1.1rem;
 }
@@ -32,7 +40,8 @@
     }
 
     .nav-item ::deep a {
-        color: #d7d7d7;
+        color: #5a5a5a;
+        font-size:12px;
         border-radius: 4px;
         height: 3rem;
         display: flex;
@@ -41,15 +50,22 @@
     }
 
 .nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: white;
+    background-color:#f1f3f4;
+    border-radius:4px;
+    color: #5a5a5a;
 }
 
 .nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
+    background-color: #f1f3f4;
+    color: #000;
 }
-
+.nav-item ::deep a span {
+    color: #607d8b;
+    font-size: 20px;
+}
+.nav-item ::deep a.active span {
+    color: #718800;
+}
 @media (min-width: 641px) {
     .navbar-toggler {
         display: none;
@@ -58,5 +74,15 @@
     .collapse {
         /* Never collapse the sidebar for wide screens */
         display: block !important;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        padding: 40px 0 0;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+        width: 239px;
+        z-index: 600;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 }

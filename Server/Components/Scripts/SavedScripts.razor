@@ -16,8 +16,8 @@
                         <AlertBanner Message="@_alertMessage" OnClose="() => _alertMessage = null" />
                     </div>
 
-                    <div class="mt-2 col-md-6 col-lg-4">
-                        <label>Shell</label>
+                    <div class="mt-2 form-group col-md-6 col-lg-4">
+                        <label class="control-label">Shell</label>
                         <InputSelect class="form-control" DisplayName="Shell" @bind-Value="_selectedScript.Shell">
                             @foreach (var shell in Enum.GetValues<ScriptingShell>())
                             {
@@ -27,33 +27,35 @@
                         <ValidationMessage For="() => _selectedScript.Shell" />
                     </div>
 
-                    <div class="mt-2 col-md-6 col-lg-4">
-                        <label>Script Name</label>
+                    <div class="mt-2 form-group col-md-6 col-lg-4">
+                        <label class="control-label">Script Name</label>
                         <InputText class="form-control" DisplayName="Script Name" @bind-Value="_selectedScript.Name" placeholder="Script name" />
                         <ValidationMessage For="() => _selectedScript.Name" />
                     </div>
 
-                    <div class="mt-2 col-md-6 col-lg-4">
-                        <label>Folder Path</label>
+                    <div class="mt-2 form-group col-md-6 col-lg-4">
+                        <label class="control-label">Folder Path</label>
                         <InputText class="form-control" DisplayName="Folder Path" @bind-Value="_selectedScript.FolderPath" placeholder="Example: or/portland/quick burger #5" />
                         <ValidationMessage For="() => _selectedScript.FolderPath" />
                     </div>
 
 
-                    <div class="mt-2 col-md-6 col-lg-4">
-                        <label>Public?</label>
-                        <br />
-                        <InputCheckbox DisplayName="Public?" @bind-Value="_selectedScript.IsPublic" />
+                    <div class="mt-2 col-md-6 col-lg-4 my-auto">
+                        <div class="custom-control custom-checkbox">
+                            <InputCheckbox DisplayName="Public?" @bind-Value="_selectedScript.IsPublic" id="IsPublic" class="custom-control-input" />
+                            <label class="custom-control-label" for="IsPublic">Public?</label>
+                        </div>
                         <ValidationMessage For="() => _selectedScript.IsPublic" />
                     </div>
-                    <div class="mt-2 col-md-6 col-lg-4">
-                        <label>Quick Script?</label>
-                        <br />
-                        <InputCheckbox DisplayName="Quick Script?" @bind-Value="_selectedScript.IsQuickScript" />
+                    <div class="mt-2 col-md-6 col-lg-4 my-auto">
+                        <div class="custom-control custom-checkbox">
+                            <InputCheckbox DisplayName="Quick Script?" @bind-Value="_selectedScript.IsQuickScript" id="IsQuickScript" class="custom-control-input" />
+                            <label class="custom-control-label" for="IsQuickScript">Quick Script?</label>
+                        </div>
                         <ValidationMessage For="() => _selectedScript.IsQuickScript" />
                     </div>
-                    <div class="mt-2 col-md-6 col-lg-4">
-                        <label>Creator</label>
+                    <div class="mt-2 form-group col-md-6 col-lg-4 ">
+                        <label class="control-label">Creator</label>
                         <br />
                         <input class="form-control" readonly value="@_selectedScript.Creator?.UserName" />
                     </div>
@@ -90,13 +92,11 @@
                         </h5>
                         <div class="row">
                             <div class="mt-2 col-md-6">
-                                <label>Send Email</label>
-                                <br />
-                                <InputCheckbox DisplayName="Send Email on Error" @bind-Value="_selectedScript.SendEmailOnError" />
-                                <ValidationMessage For="() => _selectedScript.SendEmailOnError" />
-                                <br />
-                                to
-                                <br />
+                                <div class="custom-control custom-checkbox mb-2">
+                                    <InputCheckbox DisplayName="Send Email on Error" class="custom-control-input" id="SendEmailOnError" @bind-Value="_selectedScript.SendEmailOnError" />
+                                    <label class="custom-control-label" for="SendEmailOnError">Send email to</label>
+                                    <ValidationMessage For="() => _selectedScript.SendEmailOnError" />
+                                </div>
                                 <InputText type="email"
                                            class="form-control"
                                            disabled="@(!_selectedScript.SendEmailOnError)"
@@ -104,11 +104,12 @@
                                            @bind-Value="_selectedScript.SendErrorEmailTo" />
                                 <ValidationMessage For="() => _selectedScript.SendErrorEmailTo" />
                             </div>
-                            <div class="mt-2 col-md-6">
-                                <label>Generate Alert</label>
-                                <br />
-                                <InputCheckbox DisplayName="Alert on Error" @bind-Value="_selectedScript.GenerateAlertOnError" />
-                                <ValidationMessage For="() => _selectedScript.GenerateAlertOnError" />
+                            <div class="mt-2 col-md-6 d-flex align-items-center">
+                                  <div class="custom-control custom-checkbox mb-2">
+                                    <InputCheckbox DisplayName="Alert on Error" @bind-Value="_selectedScript.GenerateAlertOnError" class="custom-control-input" id="GenerateAlertOnError" />
+                                    <label class="custom-control-label" for="GenerateAlertOnError">Generate Alert</label>
+                                    <ValidationMessage For="() => _selectedScript.GenerateAlertOnError" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -131,8 +132,8 @@
             </div>
 
             <div class="h100">
-                <InputTextArea @bind-Value="_selectedScript.Content" 
-                               DisplayName="Script Input" 
+                <InputTextArea @bind-Value="_selectedScript.Content"
+                               DisplayName="Script Input"
                                class="h-100 w-100"
                                spellcheck="false"
                                autocomplete="off"
@@ -144,10 +145,11 @@
     <div class="tree-view-wrapper-grid h-100 pb-3">
         <div>
             <h5>Saved Scripts</h5>
-            <div>
-                <input type="checkbox" @bind="ParentPage.ShowOnlyMyScripts" />
-                <span class="align-top">Show only mine</span>
+            <div class="custom-control custom-checkbox">
+                <input id="ShowOnlyMyScripts" type="checkbox" class="custom-control-input" @bind="ParentPage.ShowOnlyMyScripts" />
+                <label class="custom-control-label" for="ShowOnlyMyScripts">Show only mine</label>
             </div>
+
         </div>
         <TreeView DataSource="ParentPage.TreeNodes"
                   ItemTypeSelector="x => x.ItemType"
@@ -156,7 +158,7 @@
                   ChildItemSelector="x => x.ChildItems"
                   ItemIconCssSelector="ParentPage.GetItemIconCss"
                   KeySelector="x => x.Id"
-                  WrapperStyle="border: 1px solid gray; padding: .5em; height: 100%; border-radius: 5px;"
+                  WrapperStyle="border: 1px solid #dedede; padding: .5em; height: 100%; border-radius: 5px;"
                   T="ScriptTreeNode" />
     </div>
 </div>

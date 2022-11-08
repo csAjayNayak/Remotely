@@ -201,7 +201,7 @@ namespace Remotely.Server
                 }
                 if (bool.Parse(Configuration["ApplicationOptions:RedirectToHttps"]))
                 {
-                    app.UseHttpsRedirection();
+                    //app.UseHttpsRedirection();
                 }
             }
 

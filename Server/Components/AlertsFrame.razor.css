@@ -2,7 +2,7 @@
     position: absolute;
     top: 75px;
     right: 5px;
-    z-index: 4;
+    z-index: 1031;
     transition: .5s ease left;
     user-select: none;
 }
@@ -20,21 +20,30 @@
     overflow-y: auto;
     text-align: center;
     opacity: 0;
-    z-index: 4;
+    z-index: 1031;
     transition: .25s ease all;
 }
 
-    #alertsFrame.open {
-        opacity: 1;
-        transition: .25s ease all;
-        pointer-events: unset;
-        transform: translateX(0);
+.btn-link {
+    background: #718800;
+    border-color: #718800;
+}
+
+    .btn-link:hover {
+        background: #718800;
+        border-color: #718800;
     }
+
+#alertsFrame.open {
+    opacity: 1;
+    transition: .25s ease all;
+    pointer-events: unset;
+    transform: translateX(0);
+}
 
 
 @media (min-width: 641px) {
     #alertsButton {
-        top: 5px;
+        top: 1px;
     }
-
 }

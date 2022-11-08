@@ -22,16 +22,39 @@ button {
 
 .option-button {
     position: relative;
-    height: 40px;
     margin: 5px 0;
-    width: 90%;
     user-select: none;
+    color: #607d8b;
+    display: inline-block;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    font-size: 12px;
+    transition-duration: 200ms;
+    transition-property: background-color, color, box-shadow, border;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    background: #fff;
+    border: 1px solid #cfd8dc;
+    box-shadow: none;
+    text-shadow: none !important;
+    outline: 0px !important;
+    border-radius: 4px;
+    height: 32px;
+    line-height: 21px;
 }
-
-.horizontal-bar-button {
-    height: 35px;
-    margin: 5px;
+.option-button span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 5px;
 }
+    .option-button:hover {
+        background: #eceff1;
+        color: #607d8b;
+    }
+    .horizontal-bar-button {
+        height: 35px;
+        margin: 5px;
+    }
 
 .menu-options-header {
     text-align: center;
@@ -52,11 +75,10 @@ button {
 
 #menuButton {
     position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
+    top: 0px;
+    left: 50%;
     font-size: 1.5em;
-    padding: 20px 5px;
+    padding: 5px 20px;
     border-radius: 0 3px 3px 0;
     pointer-events: all;
     cursor: pointer;
@@ -67,33 +89,41 @@ button {
     #menuButton:focus {
         outline: none;
     }
-
+#menuButton i {
+    transform: rotate(90deg);
+}
     #menuButton.open {
-        left: 150px;
-        transform: translateY(-50%) rotateY(180deg);
-        border-radius: 3px 0 0 3px;
+        top: 150px;
+        border-radius: 0 3px 3px 0;
         transition: .5s ease left;
+       
     }
-
-#menuFrame {
+    #menuButton.open i {
+        transform: rotate(-90deg);
+    }
+/*#menuFrame {
     position: absolute;
     left: 0;
     top: 0;
-    height: 100%;
-    width: 0;
+    height: 0;
+    width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     text-align: center;
     opacity: 0;
     z-index: 3;
     transition: .5s ease all;
-}
+}*/
 
-    #menuFrame.open {
-        width: 150px;
-        opacity: 1;
-        transition: .5s ease all;
-    }
+#menuFrame.open {
+    /*width: 150px;*/
+    height: auto;
+    opacity: 1;
+    transition: .5s ease all;
+    padding: 15px;
+    display: block;
+    clear: both;
+}
 
 
 
@@ -293,4 +323,20 @@ footer {
     z-index: 3;
     padding: 10px;
     border-radius: 5px;
+}
+.options-grid {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+    justify-content: end;
+}
+    .options-grid i {
+        display: block;
+        color: #607d8b;
+    }
+    .options-grid .d-none {
+        display: none;
+    }
+.d-none {
+    display: none;
 }

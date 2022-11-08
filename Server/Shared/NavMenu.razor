@@ -1,26 +1,31 @@
-﻿@inject IAuthService AuthService 
+﻿@inject IAuthService AuthService
 @inject IApplicationConfig AppConfig
 @inject IDataService DataService
 
-<div class="pl-4 pb-1 pr-0 pt-0 navbar navbar-dark" style="background-color: rgba(0,0,0,0.3)">
-    <a class="navbar-brand text-left" href="">
-        <div class="logo-title">
-            @if (!string.IsNullOrWhiteSpace(_organization?.OrganizationName))
-            {
-                @_organization.OrganizationName
-            }
-            else
-            {
-                <span>Remotely</span>
-            }
-        </div>
-        <div class="logo-subtitle">Support Portal</div>
-    </a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
 
+
+<div id="main-navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container-fluid">
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <div class="d-flex text-white align-items-center">
+                <div class="logo-title text-white">
+                    @if (!string.IsNullOrWhiteSpace(_organization?.OrganizationName))
+                    {
+                        @_organization.OrganizationName
+                    }
+                    else
+                    {
+                        <span>Remotely</span>
+                    }
+                </div>
+                <div class="pl-1 logo-subtitle">Support Portal</div>
+            </div>
+        </a>
+    </div>
+</div>
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
         <li class="nav-item px-3">
@@ -30,7 +35,7 @@
         </li>
 
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="/RemoteControl" target="_blank">
+            <NavLink class="nav-link" href="/RemoteControl">
                 <span class="oi oi-monitor" aria-hidden="true"></span> Remote Control
             </NavLink>
 
@@ -101,37 +106,38 @@
 
         <AuthorizeView>
             <Authorized>
-                <li class="px-3 mt-3">
-                    <a class="btn btn-link text-light" href="Identity/Account/Manage">
+                <li class="px-3 nav-item mt-3">
+                    <a class="btn btn-link text-decoration-none" href="Identity/Account/Manage">
                         Account
                     </a>
                 </li>
-                <li class="px-3">
+                <li class="px-3 nav-item">
                     <form method="post" action="Identity/Account/LogOut">
-                        <button type="submit" class="btn btn-link text-light">Log out</button>
+                        <button type="submit" class="btn btn-link text-decoration-none">Log out</button>
                     </form>
                 </li>
             </Authorized>
             <NotAuthorized>
-                <li class="px-3">
-                    <a class="btn btn-link text-light" href="Identity/Account/Login">Log in</a>
+                <li class="px-3 nav-item">
+                    <a class="btn btn-link " href="Identity/Account/Login">Log in</a>
                 </li>
                 @if (AppConfig.MaxOrganizationCount < 0 || DataService.GetOrganizationCount() < AppConfig.MaxOrganizationCount)
                 {
-                    <li class="px-3 mt-3">
-                        <a class="btn btn-link text-light" href="Identity/Account/Register">Register</a>
+                    <li class="px-3 mt-3 nav-item">
+                        <a class="btn btn-link text-decoration-none" href="Identity/Account/Register">Register</a>
                     </li>
                 }
             </NotAuthorized>
         </AuthorizeView>
 
-        <li class="px-3 mt-3">
-            <a class="btn btn-link text-light" href="/about">About</a>
+        <li class="px-3 mt-3 nav-item">
+            <a class="btn btn-link text-decoration-none" href="/about">About</a>
         </li>
     </ul>
 </div>
 
-@code {       
+
+@code {
     private bool collapseNavMenu = true;
     private Dictionary<string, object> _remoteControlAttributes
         = new() { ["target"] = "blank", ["href"] = "/RemoteControl" };

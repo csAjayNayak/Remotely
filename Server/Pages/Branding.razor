@@ -2,75 +2,85 @@
 @inherits AuthComponentBase
 @inject IDataService DataService
 @inject IToastService ToastService
-@inject IJsInterop JsInterop 
+@inject IJsInterop JsInterop
 @using Remotely.Server.Models
 @using System.ComponentModel.DataAnnotations
 
-<h3 class="mb-3">Branding</h3>
 
-
-@if (User?.IsAdministrator != true)
-{
-    <h5 class="text-muted">Only organization administrators can view this page.</h5>
-}
-else
-{
-    <AlertBanner Message="@_alertMessage" />
-
+<div class="container">
     <div class="row">
-        <div class="col-sm-8 col-lg-6 col-xl-5">
-            <div class="form-group">
-                <label class="mb-1">Branding Areas</label>
-                <br />
-                <img class="img-fluid" src="/images/Remotely_Desktop.png" />
+        <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 m-auto">
+            <h3 class="mb-3">Branding</h3>
+
+        </div>
+    </div>
+    @if (User?.IsAdministrator != true)
+    {
+        <h5 class="text-muted">Only organization administrators can view this page.</h5>
+    }
+    else
+    {
+        <AlertBanner Message="@_alertMessage" />
+
+        <div class="row p-2">
+            <div class="card p-3 col-lg-8 col-md-10 col-sm-12 col-xs-12 rounded-lg  m-auto">
+                <span class="mb-1">Branding Areas</span>
+                <div class="d-flex justify-content-center">
+                    <img class="img-fluid" src="/images/Remotely_Desktop.png" />
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-8 col-lg-6 col-xl-5">
-            <EditForm OnValidSubmit="HandleValidSubmit" Model="_inputModel">
-                <DataAnnotationsValidator />
+        <div class="row p-2">
+            <div class="card p-3 col-lg-8 col-md-10 col-sm-12 col-xs-12 rounded-lg  m-auto">
+                <EditForm OnValidSubmit="HandleValidSubmit" Model="_inputModel">
+                    <DataAnnotationsValidator />
 
-                <div class="form-group mb-5">
-                    <label class="text-info font-weight-bold">Product Name</label>
-                    <InputText class="form-control" @bind-Value="_inputModel.ProductName" />
-                    <ValidationMessage For="() => _inputModel.ProductName" />
-                </div>
-
-                @if (!string.IsNullOrWhiteSpace(_base64Icon))
-                {
-                    <div class="form-group mb-4">
-                        <label class="text-info font-weight-bold">Current Icon</label>
-                        <br />
-                        <img class="img-fluid" src="data:image/png;base64,@_base64Icon" />
+                    <div class="form-group mb-3">
+                        <label class="text-info font-weight-bold">Product Name</label>
+                        <InputText class="form-control" @bind-Value="_inputModel.ProductName" />
+                        <ValidationMessage For="() => _inputModel.ProductName" />
                     </div>
-                }
 
-                <div class="form-group mb-5">
-                    <label class="text-info font-weight-bold">New Icon</label>
-                    <InputFile type="file" accept="image/png" class="form-control" OnChange="IconUploadInputChanged" />
-                </div>
-                <div class="form-group mb-5">
-                    <label class="text-info font-weight-bold">Title Foreground</label>
-                    <ColorPicker @bind-Color="_inputModel.TitleForegroundColor" />
-                </div>
-                <div class="form-group mb-5">
-                    <label class="text-info font-weight-bold">Title Background</label>
-                    <ColorPicker @bind-Color="_inputModel.TitleBackgroundColor" />
-                </div>
-                <div class="form-group mb-5">
-                    <label class="text-info font-weight-bold">Button Color</label>
-                    <ColorPicker @bind-Color="_inputModel.TitleButtonColor" />
-                </div>
-                <div class="form-group text-right">
-                    <button class="btn btn-secondary mr-3" type="button" @onclick="ResetBranding">Reset</button>
-                    <button class="btn btn-primary" type="submit">Submit</button>
-                </div>
-            </EditForm>
+                    @if (!string.IsNullOrWhiteSpace(_base64Icon))
+                    {
+                        <div class="form-group mb-4">
+                            <label class="text-info font-weight-bold">Current Icon</label>
+                            <br />
+                            <img class="img-fluid" src="data:image/png;base64,@_base64Icon" />
+                        </div>
+                    }
+
+                    <div class="custom-file mb-3">
+                        <InputFile type="file" class="custom-file-input" id="customFile" accept="image/png" OnChange="IconUploadInputChanged"/>
+                        <label class="custom-file-label" for="customFile">New Icon</label>
+                    </div>
+
+                 
+                    <div class="form-group mb-5">
+                        <label class="text-info font-weight-bold">Title Foreground</label>
+                        <ColorPicker @bind-Color="_inputModel.TitleForegroundColor" />
+                    </div>
+                    <div class="form-group mb-5">
+                        <label class="text-info font-weight-bold">Title Background</label>
+                        <ColorPicker @bind-Color="_inputModel.TitleBackgroundColor" />
+                    </div>
+                    <div class="form-group mb-5">
+                        <label class="text-info font-weight-bold">Button Color</label>
+                        <ColorPicker @bind-Color="_inputModel.TitleButtonColor" />
+                    </div>
+                    <div class="form-group text-right">
+                        <button class="btn btn-default mr-3" type="button" @onclick="ResetBranding">Reset</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </EditForm>
+            </div>
         </div>
-    </div>
-}
+    }
+</div>
+
+
+
 
 @code {
     private string _alertMessage;
@@ -101,12 +111,12 @@ else
     private async Task HandleValidSubmit(EditContext context)
     {
         await DataService.UpdateBrandingInfo(
-            User.OrganizationID,
-            _inputModel.ProductName,
-            _inputModel.IconBytes,
-            _inputModel.TitleForegroundColor,
-            _inputModel.TitleBackgroundColor,
-            _inputModel.TitleButtonColor);
+        User.OrganizationID,
+        _inputModel.ProductName,
+        _inputModel.IconBytes,
+        _inputModel.TitleForegroundColor,
+        _inputModel.TitleBackgroundColor,
+        _inputModel.TitleButtonColor);
 
         if (_inputModel?.IconBytes?.Any() == true)
         {

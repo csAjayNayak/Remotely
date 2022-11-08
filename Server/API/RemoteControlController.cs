@@ -11,6 +11,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Remotely.Server.Auth;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,6 +19,7 @@ namespace Remotely.Server.API
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class RemoteControlController : ControllerBase
     {
         public RemoteControlController(IDataService dataService,

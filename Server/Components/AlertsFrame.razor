@@ -3,12 +3,12 @@
 @inject IDataService DataService 
 @inject IModalService ModalService 
 
-<button id="alertsButton" class="btn btn-info" @onclick="ToggleOpen">
+<a id="alertsButton" class="btn btn-link text-white" @onclick="ToggleOpen">
     <span class="oi oi-bell"></span>
     <span id="alertsCount">
         @_alerts.Count
     </span>
-</button>
+</a>
 
 <div id="alertsFrame" class="bg-secondary @FrameClass">
     <div class="text-right">
