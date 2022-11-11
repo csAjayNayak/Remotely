@@ -640,8 +640,7 @@ h3 {
 }
 
 .icon-title {
-    font-weight: 700;
-    color: #455a64;
+   width: 180px;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
