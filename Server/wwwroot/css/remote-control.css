@@ -124,6 +124,7 @@ button {
 
 #menuFrame.open {
     /*width: 150px;*/
+    background #ffffff;
     height: auto;
     opacity: 1;
     transition: .5s ease all;
@@ -137,7 +138,6 @@ button {
 .horizontal-button-bar {
     background-color: #cfd8dc !important;
     color: #180808 !important;
-
 }
 
 
@@ -172,13 +172,14 @@ button {
 
 #screenViewerWrapper {
     position: fixed;
-    top: 0;
+    top: 72px;
     left: 0;
     right: 0;
     bottom: 0;
-    overflow: auto;
+    overflow: hidden;
     -ms-touch-action: pan-x pan-y;
     touch-action: pan-x pan-y;
+    border: 2px solid #718800;
 }
 
 #screenViewer,
@@ -353,7 +354,21 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
     justify-content: end;
 }
-
+.option-header {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    background: #fff;
+    padding-left: 20px;
+}
+.option-header h1 {
+    color: #181818;
+    font-size: 22px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+}
 .options-grid i {
     display: block;
     color: #607d8b;
