@@ -339,8 +339,8 @@
         var parentOrigin = "nan"
 
         function sendEvent(eventData) {
-            var payload = {id:tabId,data:eventData};
-            parent.postMessage(payload, parentOrigin);  //  `*` on any domain        
+            var payload = {id:tabId,data:eventData,other:parentOrigin};
+            parent.postMessage(payload, "*");  //  `*` on any domain        
         }
         function initializeComunicationParams() {
             /*Caster ID*/
