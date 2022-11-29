@@ -72,6 +72,39 @@ export const ViewerApp = {
 
         ViewerApp.Settings.displayName = ViewerApp.RequesterName;
         SetSettings(ViewerApp.Settings);
+    },
+    CustomConnectPMS: () => {
+
+        var tabId = "nan"
+        var parentOrigin = "nan"
+
+        /*Caster ID*/
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop.toString()),
+        });
+
+        tabId = params['casterID'];
+
+        /*Origin*/
+        if (window.parent.origin) {
+            parentOrigin = window.parent.origin;
+        }
+
+        console.log("Parent Origin : " + parentOrigin);
+        console.log("Tab Id : " + tabId);
+
+
+        var controlIds = ["rm-upload-app", "rm-trial"];
+        controlIds.forEach(
+            (id) => {
+                document.getElementById(id).addEventListener("click", ($event) => {
+                    var payload = { id: tabId, data: $event.currentTarget['dataset'].eventvalue, other: parentOrigin };
+                    parent.postMessage(JSON.parse(JSON.stringify(payload)), "*"); //  `*` on any domain      
+                });
+
+            }
+        )
+
     }
 }
 

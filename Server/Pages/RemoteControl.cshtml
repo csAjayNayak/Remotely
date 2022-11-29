@@ -95,6 +95,11 @@
         <script src="~/lib/msgpack5/msgpack5.min.js"></script>
         <script src="~/lib/microsoft/signalr-protocol-msgpack/dist/browser/signalr-protocol-msgpack.min.js"></script>
     </environment>
+    <script>
+        function test(){
+            console.log("dsads");
+        }
+    </script>
 </head>
 
 <body>
@@ -126,7 +131,7 @@
                     title="View Only - If toggled, prevents sending commnads and input to the remote computer.">
                     <i class="fas fa-eye d-block"></i>
                 </button>
-                <button id="rm-trial" class="option-button vm-link" data-eventValue='{"id":1,"data":null}'
+                <button id="rm-trial" class="option-button vm-link" data-eventValue='{"id":"vm-link-1","data":null}'
                     title="Download Trial.">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" stroke="#607d8b" fill="#607d8b"
@@ -139,7 +144,7 @@
                     </span>
                 </button>
 
-                <button id="rm-upload-app" class="option-button vm-link" data-eventValue='{"id":2,"data":null}'
+                <button id="rm-upload-app" class="option-button vm-link" data-eventValue='{"id":"vm-link-2","data":null}'
                     title="Upload Application.">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" stroke="#607d8b" fill="#607d8b"
@@ -335,46 +340,11 @@
 
     <script src="~/src/RemoteControl/App.js" type="module"></script>
     <script>
-        var tabId = "nan"
-        var parentOrigin = "nan"
-
-        function sendEvent(eventData) {
-            var payload = {id:tabId,data:eventData,other:parentOrigin};
-            parent.postMessage(payload, "*");  //  `*` on any domain        
-        }
-        function initializeComunicationParams() {
-            /*Caster ID*/
-            const params = new Proxy(new URLSearchParams(window.location.search), {
-                get: (searchParams, prop) => searchParams.get(prop),
-            });
-            tabId = params['casterID'];
-
-            /*Origin*/
-            if (window.parent.origin) {
-                parentOrigin = window.parent.origin;
-            }
-
-            console.log("Parent Origin : "+parentOrigin);
-            console.log("Tab Id : "+tabId);
-
-        }
-        function setCustomControlListener() {
-            var controlIds = ["rm-upload-app", "rm-trial"];
-            controlIds.forEach(
-                (id) => {
-                    document.getElementById(id).addEventListener("click",($event)=> {
-                        sendEvent($event.currentTarget.dataset.eventvalue);
-                    });
-
-                }
-            )
-
-        }
+        
         window.addEventListener("load", () => {
             ViewerApp.Init();
             @* Custom Functionality *@
-            initializeComunicationParams();
-            setCustomControlListener();
+            ViewerApp.CustomConnectPMS();
         })
     </script>
 </body>
