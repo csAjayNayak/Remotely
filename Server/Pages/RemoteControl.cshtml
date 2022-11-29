@@ -339,7 +339,7 @@
         var parentOrigin = "nan"
 
         function sendEvent(eventData) {
-            var payload = {id:casterID,data:eventData};
+            var payload = {id:tabId,data:eventData};
             parent.postMessage(payload, parentOrigin);  //  `*` on any domain        
         }
         function initializeComunicationParams() {
@@ -353,14 +353,17 @@
             if (window.parent.origin) {
                 parentOrigin = window.parent.origin;
             }
+
+            console.log("Parent Origin : "+parentOrigin);
+            console.log("Tab Id : "+tabId);
+
         }
         function setCustomControlListener() {
             var controlIds = ["rm-upload-app", "rm-trial"];
             controlIds.forEach(
                 (id) => {
-
-                    document.getElementById(id).addEventListener("click", function () {
-                        sendEvent(this.dataset.eventValue);
+                    document.getElementById(id).addEventListener("click",($event)=> {
+                        sendEvent($event.currentTarget.dataset.eventvalue);
                     });
 
                 }
