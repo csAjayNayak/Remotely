@@ -48,6 +48,9 @@ export var DownloadRecordingButton = document.getElementById("downloadRecordingB
 export var ViewOnlyButton = document.getElementById("viewOnlyButton") as HTMLButtonElement;
 export var FullScreenButton = document.getElementById("fullScreenButton") as HTMLButtonElement;
 export var ToastsWrapper = document.getElementById("toastsWrapper") as HTMLDivElement;
+export var VMLinkDownloadTrial = document.getElementById("rmTrial") as HTMLButtonElement;
+export var VMLinkUploadSolution = document.getElementById("rmUploadApp") as HTMLButtonElement;
+
 
 export function GetCurrentViewer(): HTMLElement {
     if (ScreenViewer.hasAttribute("hidden")) {

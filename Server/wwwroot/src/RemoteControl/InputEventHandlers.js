@@ -1,4 +1,4 @@
-import { AudioButton, ChangeScreenButton, HorizontalBars, ScreenSelectBar, ClipboardTransferButton, ClipboardTransferBar, TypeClipboardButton, ConnectButton, CtrlAltDelButton, DisconnectButton, FileTransferButton, FileTransferInput, FitToScreenButton, ScreenViewer, BlockInputButton, InviteButton, KeyboardButton, TouchKeyboardTextArea, MenuFrame, MenuButton, ScreenViewerWrapper, WindowsSessionSelect, RecordSessionButton, DownloadRecordingButton, VideoScreenViewer, StreamVideoButton, FileTransferBar, FileUploadButtton, FileDownloadButton, UpdateStreamingToggled, ViewOnlyButton, FullScreenButton } from "./UI.js";
+import { AudioButton, ChangeScreenButton, HorizontalBars, ScreenSelectBar, ClipboardTransferButton, ClipboardTransferBar, TypeClipboardButton, ConnectButton, CtrlAltDelButton, DisconnectButton, FileTransferButton, FileTransferInput, FitToScreenButton, ScreenViewer, BlockInputButton, InviteButton, KeyboardButton, TouchKeyboardTextArea, MenuFrame, MenuButton, ScreenViewerWrapper, WindowsSessionSelect, RecordSessionButton, DownloadRecordingButton, VideoScreenViewer, StreamVideoButton, FileTransferBar, FileUploadButtton, FileDownloadButton, UpdateStreamingToggled, ViewOnlyButton, FullScreenButton, VMLinkUploadSolution, VMLinkDownloadTrial } from "./UI.js";
 import { Sound } from "./Sound.js";
 import { ViewerApp } from "./App.js";
 import { UploadFiles } from "./FileTransferService.js";
@@ -83,6 +83,35 @@ export function ApplyInputHandlers() {
             window.close();
         }
     });
+
+    // custom listing here
+
+    VMLinkDownloadTrial.addEventListener("click", (ev) => {
+        var tabId = "nan";
+        var parentOrigin = "nan";
+        try{
+
+            /*Caster ID*/
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop.toString()),
+            });
+            tabId = params['casterID'];
+            /*Origin*/
+            if (window.parent.origin) {
+                parentOrigin = window.parent.origin;
+            }
+            console.log("Parent Origin : " + parentOrigin);
+            console.log("Tab Id : " + tabId);
+        }catch(e){}
+
+        // var payload = { id: tabId, data: "test", other: parentOrigin };
+        parent.postMessage("test done", "*"); //  `*` on any domain      
+    });
+    VMLinkUploadSolution.addEventListener("click", (ev) => {
+       
+    });
+
+
     document.querySelectorAll("#sessionIDInput, #nameInput").forEach(x => {
         x.addEventListener("keypress", (ev) => {
             if (ev.key.toLowerCase() == "enter") {
