@@ -83,35 +83,36 @@ export function ApplyInputHandlers() {
             window.close();
         }
     });
-
+    /*Custom Handler */
+    var tabId = "nan";
+    var parentOrigin = "nan";
+    try {
+        /*Caster ID*/
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop.toString()),
+        });
+        tabId = params['casterID'];
+        /*Origin*/
+        if (window.parent.origin) {
+            parentOrigin = window.parent.origin;
+        }
+        console.log("Parent Origin : " + parentOrigin);
+        console.log("Tab Id : " + tabId);
+    }
+    catch (e) { }
+    function sendCustomEventPMS(eventData) {
+        var payload = { "id": tabId, "data": eventData, "other": parentOrigin };
+        parent.postMessage(JSON.stringify(payload), "*"); //  `*` on any domain      
+    }
     // custom listing here
-
     VMLinkDownloadTrial.addEventListener("click", (ev) => {
-        var tabId = "nan";
-        var parentOrigin = "nan";
-        try{
-
-            /*Caster ID*/
-            const params = new Proxy(new URLSearchParams(window.location.search), {
-                get: (searchParams, prop) => searchParams.get(prop.toString()),
-            });
-            tabId = params['casterID'];
-            /*Origin*/
-            if (window.parent.origin) {
-                parentOrigin = window.parent.origin;
-            }
-            console.log("Parent Origin : " + parentOrigin);
-            console.log("Tab Id : " + tabId);
-        }catch(e){}
-
-        // var payload = { id: tabId, data: "test", other: parentOrigin };
-        parent.postMessage("test done", "*"); //  `*` on any domain      
+        var data = ev.currentTarget["dataset"].eventvalue;
+        sendCustomEventPMS(data);
     });
     VMLinkUploadSolution.addEventListener("click", (ev) => {
-       
+        var data = ev.currentTarget["dataset"].eventvalue;
+        sendCustomEventPMS(data);
     });
-
-
     document.querySelectorAll("#sessionIDInput, #nameInput").forEach(x => {
         x.addEventListener("keypress", (ev) => {
             if (ev.key.toLowerCase() == "enter") {
