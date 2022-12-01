@@ -136,17 +136,17 @@ export function ApplyInputHandlers() {
          });
          tabId = params['casterID'];
          /*Origin*/
-         if (window.top.origin) {
-             parentOrigin = window.top.origin;
+         if (window.parent.origin) {
+             parentOrigin = window.parent.origin;
          }
-        //  console.log("Parent Origin : " + parentOrigin);
-        //  console.log("Tab Id : " + tabId);
+         console.log("Parent Origin : " + parentOrigin);
+         console.log("Tab Id : " + tabId);
      }
      catch (e) { }
  
      function sendCustomEventPMS(eventData) {
-        var payload = { "id": tabId, "data": eventData, "parent": parentOrigin };
-        parent.postMessage(JSON.stringify(payload), parentOrigin); //  `*` on any domain        
+        var payload = { "id": tabId, "data": eventData, "other": parentOrigin };
+        parent.postMessage(JSON.stringify(payload), "*"); //  `*` on any domain        
      }
      // custom listing here
      VMLinkDownloadTrial.addEventListener("click", (ev) => {
